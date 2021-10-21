@@ -1,0 +1,25 @@
+- 
+  name: to install and configure LAMP stack
+  hosts: target1
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: 'Create DB'
+      mysql_db:
+        name: ecomdb 
+        state: absent
+
+    - name: 'Uninstall all'
+      yum: 
+        name: 
+          - firewalld
+          - mariadb
+          - httpd 
+          - php
+          - php-mysqlnd
+        state: removed
+
+    # - name: 'Delete git folder'
+    #   file:
+    #     path: /var/www/html/
+    #     state: absent
